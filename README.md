@@ -16,7 +16,7 @@ Our project investigates whether these characteristics can predict if a song app
 
 Our primary research question is: **Can a song's audio features, genre, and release era predict whether a Billboard Hot 100 song reaches the Top 10?**
 
-Our analysis used approximately over 24,000 songs, with only 2,081 out of 16,851 songs in the training set reaching the Top 10. Our tuned logistic regression model achieved an accuracy of 0.586, recall of 0.650, precision of 0.169, and F1-score of 0.268 on the held-out test set. Although the model correctly identified approximately 65% of songs that reached the Billboard Hot 100 Top 10, its low precision indicates a high number of false positives. These findings suggest that audio features, genre, and release era have limited predictive power for identifying Top 10 hits, and further improvements are needed before the model can reliably predict chart success.
+Our analysis used 24074 songs, with only 2,081 out of 16,851 songs in the training set reaching the Top 10. Our tuned logistic regression model achieved an accuracy of 0.586, recall of 0.650, precision of 0.169, and F1-score of 0.268 on the held-out test set. Although the model correctly identified approximately 65% of songs that reached the Billboard Hot 100 Top 10, its low precision indicates a high number of false positives. These findings suggest that audio features, genre, and release era have limited predictive power for identifying Top 10 hits, and further improvements are needed before the model can reliably predict chart success.
 
 ### Dataset
 
@@ -85,7 +85,9 @@ dataset = "thedevastator/billboard-hot-100-audio-features"
 
 The following files are downloaded:
 
-Hot Stuff.csv Hot 100 Audio Features.csv
+- Hot Stuff.csv
+
+- Hot 100 Audio Features.csv
 
 The download process is included in the analysis code, so the data does not need to be downloaded manually. But before running the report, create the data folders if they do not already exist by running:
 
