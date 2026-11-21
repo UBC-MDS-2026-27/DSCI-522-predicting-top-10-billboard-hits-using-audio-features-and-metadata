@@ -35,6 +35,10 @@ Dataset Source: [Billboard Hot 100 Audio Features](https://www.kaggle.com/datase
 
 Dataset license: Dataset copyright by authors, as listed on the [Kaggle dataset page](https://www.kaggle.com/datasets/thedevastator/billboard-hot-100-audio-features). The data was originally compiled by Sean Miller; please credit the authors when reusing it.
 
+### Report
+
+The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata/analysis/billboard-top-10-prediction.html) (HTML).
+
 ### Usage
 
 The following instructions describe how to reproduce the analysis locally.
