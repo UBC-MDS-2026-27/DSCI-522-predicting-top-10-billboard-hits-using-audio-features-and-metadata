@@ -98,10 +98,10 @@ mkdir -p data/raw data/processed
 From the root directory of the repository, run:
 
 ``` bash
-uv run quarto render analysis/report.qmd or uv run quarto preview analysis/report.qmd 
+uv run quarto render analysis/billboard-top-10-prediction.qmd or uv run quarto preview analysis/billboard-top-10-prediction.qmd 
 ```
 
-This renders `analysis/report.html`. Quarto runs the code from the `analysis/` folder, so the relative paths to `data/` in the report resolve correctly.
+This renders `analysis/billboard-top-10-prediction.html`. Quarto runs the code from the`analysis/`folder, so the relative paths to`data/\` in the report resolve correctly.
 
 The analysis performs data loading, cleaning, exploratory data analysis, model training, and evaluation. The results are presented in a rendered HTML report.
 
