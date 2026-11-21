@@ -35,6 +35,10 @@ Dataset Source: [Billboard Hot 100 Audio Features](https://www.kaggle.com/datase
 
 Dataset license: Dataset copyright by authors, as listed on the [Kaggle dataset page](https://www.kaggle.com/datasets/thedevastator/billboard-hot-100-audio-features). The data was originally compiled by Sean Miller; please credit the authors when reusing it.
 
+### Report
+
+The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata/analysis/billboard-top-10-prediction.html) (HTML).
+
 ### Usage
 
 The following instructions describe how to reproduce the analysis locally.
@@ -94,10 +98,10 @@ mkdir -p data/raw data/processed
 From the root directory of the repository, run:
 
 ``` bash
-uv run quarto render analysis/report.qmd or uv run quarto preview analysis/report.qmd 
+uv run quarto render analysis/billboard-top-10-prediction.qmd or uv run quarto preview analysis/billboard-top-10-prediction.qmd 
 ```
 
-This renders `analysis/report.html`. Quarto runs the code from the `analysis/` folder, so the relative paths to `data/` in the report resolve correctly.
+This renders `analysis/billboard-top-10-prediction.html`. Quarto runs the code from the`analysis/`folder, so the relative paths to`data/` in the report resolve correctly.
 
 The analysis performs data loading, cleaning, exploratory data analysis, model training, and evaluation. The results are presented in a rendered HTML report.
 
