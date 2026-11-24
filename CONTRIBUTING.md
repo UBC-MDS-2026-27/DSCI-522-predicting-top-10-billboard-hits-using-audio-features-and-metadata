@@ -48,6 +48,47 @@ To contribute code, analysis, or documentation:
 
 All pull requests must be reviewed by a Group 25 member before merging. Contributors may be asked to revise their work before it is accepted.
 
+## Adding a Package and Updating the Docker Image
+
+The Docker image is built from `Dockerfile`, `pyproject.toml`, and `uv.lock`, and is published automatically to [Docker Hub](https://hub.docker.com/r/<your-dockerhub-username>/dsci-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata) by GitHub Actions. You never need to build or push it yourself.
+
+To add or update a package:
+
+1.  Create a branch from `main`:
+
+    ``` bash
+    git switch main && git pull
+    git switch -c add-<package>
+    ```
+
+2.  Add the package with an exact version:
+
+    ``` bash
+    uv add "<package>==<version>"
+    ```
+
+3.  Commit and push:
+
+    ``` bash
+    git add pyproject.toml uv.lock
+    git commit -m "Add <package>"
+    git push -u origin add-<package>
+    ```
+
+4.  Wait for the **Publish image to Docker Hub** workflow in the Actions tab to finish. It publishes a new image and updates the tag in `docker-compose.yml` on your branch.
+
+5.  Pull the update and check the report still renders:
+
+    ``` bash
+    git pull
+    docker compose pull
+    docker compose run --rm analysis-env uv run quarto render analysis/billboard-top-10-prediction.qmd
+    ```
+
+6.  Open a pull request. After it is merged, teammates run `git pull` and `docker compose pull` to get the new environment.
+
+Do not edit the `image:` line in `docker-compose.yml` by hand. The workflow updates it.
+
 ## Generative AI Policy
 
 Contributors may use generative AI tools, such as ChatGPT, GitHub Copilot, or Claude, to assist with coding, debugging, documentation, and brainstorming.
