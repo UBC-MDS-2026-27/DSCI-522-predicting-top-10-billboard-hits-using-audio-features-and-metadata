@@ -1,11 +1,10 @@
-
-
 ---
 title: "Predicting Top 10 Billboard Hits Using Audio Features and Metadata"
 author: "Nitpreet Bamra, Eshadhi Bogoda, Jack Liu, James Wang"
 date: "2026-11-18"
 format:
   html:
+    embed-resources: true
     include-in-header:
       text: |
         <style>
