@@ -121,7 +121,7 @@ git push
 
 Once the pull request is merged into `main`, GitHub Pages updates the website automatically within a few minutes. Please do not edit `docs/index.html` by hand, and keep `embed-resources: true` in the report's YAML header so that all figures are included in the single HTML file.
 
-### Working in the container
+### Working in the container.
 
 To run and edit the project, we work inside the Docker container, using Positron over ssh.
 
