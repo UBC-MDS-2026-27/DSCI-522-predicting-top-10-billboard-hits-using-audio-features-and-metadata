@@ -89,6 +89,37 @@ To add or update a package:
 
 Do not edit the `image:` line in `docker-compose.yml` by hand. The workflow updates it.
 
+## Republishing the Report
+
+The rendered report is published on GitHub Pages from `docs/index.html`. Whenever you change the analysis or the report, you also need to republish it so the website matches the code in the repository.
+
+First, make sure you are on your feature branch and have the latest Docker image:
+
+```bash
+docker compose pull
+```
+
+Next, render the report inside the container. This ensures it is built with the same packages as everyone else's:
+
+```bash
+docker compose run --rm analysis-env uv run quarto render analysis/billboard-top-10-prediction.qmd
+```
+
+Then copy the rendered report into the `docs/` folder, which is the folder GitHub Pages serves:
+
+```bash
+cp analysis/billboard-top-10-prediction.html docs/index.html
+```
+
+Finally, commit both files, push your branch, and open a pull request as usual:
+
+```bash
+git add analysis/billboard-top-10-prediction.html docs/index.html
+git commit -m "Republish report"
+git push
+```
+
+Once the pull request is merged into `main`, GitHub Pages updates the website automatically within a few minutes. Please do not edit `docs/index.html` by hand, and keep `embed-resources: true` in the report's YAML header so that all figures are included in the single HTML file.
 
 ### Working in the container
 
