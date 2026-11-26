@@ -89,6 +89,83 @@ To add or update a package:
 
 Do not edit the `image:` line in `docker-compose.yml` by hand. The workflow updates it.
 
+
+### Working in the container
+
+To run and edit the project, we work inside the Docker container, using Positron over ssh.
+
+**Before your first connection:**
+
+1.  Download [Positron](https://positron.posit.co/download.html), if you do not already have it.
+
+2.  Set up an ssh key, if you do not already have one. In a terminal on your computer, run the command below and press Enter at each question:
+
+    ``` bash
+    ssh-keygen -t ed25519
+    ```
+
+    Then check that `~/.ssh/id_ed25519.pub` exists.
+
+3.  Check that Git has your correct email on your computer:
+
+    ``` bash
+    git config --global user.email
+    ```
+
+    It should print the email of your GitHub account. If it prints nothing, set your name and email. `docker-compose.yml` shares these with the container, so your commits there count as yours:
+
+    ``` bash
+    git config --global user.name "Your Name"
+    git config --global user.email "you@example.com"
+    ```
+
+4.  Download the image, from the root of the repository:
+
+    ``` bash
+    docker compose pull
+    ```
+
+**Connecting with Positron:**
+
+1.  Start the container from the root of the repository:
+
+    ``` bash
+    docker compose up -d
+    ```
+
+2.  In Positron, open the Command Palette and run **Remote SSH: Show Remote Menu** → **Connect to Host**, then enter `root@localhost:2222`.
+
+3.  Open Folder in the Explorer. Type in `/workspace` at the path box that appears.
+
+4.  If Positron shows **Restricted Mode**, click **Trust this folder**.
+
+5.  Pick the console with the interpreter at `/opt/venv/bin/python`. If it isn't listed, run **Python: Select Interpreter** → **Enter interpreter path...** and type it in. Check it with:
+
+    ``` python
+    import sys; print(sys.executable)
+    ```
+
+6.  You should now be abe to use the terminal, console and render in positron. If you cannot, check the section things to try if it doesn't connect below. 
+
+    ``` bash
+    docker compose down
+    ```
+
+7.  When you're finished, close the Positron window and run:
+
+    ``` bash
+    docker compose down
+    ```
+
+**Things to try if it doesn't connect:**
+
+-   **Restricted Mode / Python unavailable:** click **Trust this folder**.
+-   **`/opt/venv/bin/python` not in the list:** enter the path by hand (step 5).
+-   **"Remote host identification has changed":** run `ssh-keygen -R "[localhost]:2222"` and connect again.
+-   **GitHub asks you to sign in when you push:** sign in once in the browser window that opens. Positron will remember it.
+
+
+
 ## Generative AI Policy
 
 Contributors may use generative AI tools, such as ChatGPT, GitHub Copilot, or Claude, to assist with coding, debugging, documentation, and brainstorming.
@@ -110,3 +187,4 @@ Contributions that do not follow these guidelines may be requested for revision 
 ## Questions
 
 For questions about contributing, please open an issue in the project repository.
+
