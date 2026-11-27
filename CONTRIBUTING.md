@@ -133,7 +133,7 @@ To run and edit the project, we work inside the Docker container, using Positron
     docker compose up -d
     ```
 
-2.  In Positron, open the Command Palette (Cmd+Shift+P on Mac, Ctrl+Shift+P on windows)
+2.  In Positron, open the Command Palette (Cmd+Shift+P on Mac, Ctrl+Shift+P on windows).
 
 3. Type and run **Remote SSH: Show Remote Menu** → select **Connect to Host** and  type `root@localhost:2222`. 
     
