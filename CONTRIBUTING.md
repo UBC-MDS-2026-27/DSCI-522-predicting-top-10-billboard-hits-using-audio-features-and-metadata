@@ -143,13 +143,20 @@ To run and edit the project, we work inside the Docker container, using Positron
 
 5.  If Positron shows **Restricted Mode**, click **Trust this folder**.
 
-6.  Pick the console with the interpreter at `/opt/venv/bin/python`. If it isn't listed, run **Python: Select Interpreter** → **Enter interpreter path...** and type it in. Check it with:
+6.  In the Command Palette pick the console with the interpreter at `/opt/venv/bin/python`. If it isn't listed, run **Python: Select Interpreter** → **Enter interpreter path...** and type it in. Check it with:
 
     ``` python
     import sys; print(sys.executable)
     ```
 
-7.  You should now be abe to use the terminal, console and render in positron. **If you are having issues**, check the section **Troubleshooting Help** found below. 
+7.  You should now be abe to use the terminal, console and render in positron.
+    To confirm, in the terminal run:
+
+    ````python
+    uv run quarto preview analysis/billboard-top-10-prediction.qmd
+    ````
+    
+ **If you are having issues**, check the section **Troubleshooting Help** found below. 
 
 8.  When you're finished, close the Positron window and run:
 
