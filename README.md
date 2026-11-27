@@ -39,93 +39,86 @@ Dataset license: Dataset copyright by authors, as listed on the [Kaggle dataset 
 
 The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata/analysis/billboard-top-10-prediction.html) (HTML).
 
-### Usage
+## Usage
 
 The following instructions describe how to reproduce the analysis locally.
 
-1.  Prerequisites
+#### 1: Prerequisites
 
-Ensure that the following software is installed:
+Ensure that [Git](https://git-scm.com/downloads) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) are installed on your computer.
 
-- Git — for cloning the repository.
+Open Docker Desktop and ensure that it is running before proceeding with the following steps.
 
-- Python — for running the analysis.
+#### 2: Clone the Repository
 
-- uv — for managing the Python environment and dependencies.
-
-- Quarto — for rendering the analysis report.
-
-2.  Clone the Repository
-
-Open a terminal in git bash and run:
+Open a Git Bash terminal and run the following commands to clone the repository and navigate to the project directory:
 
 ``` bash
 git clone https://github.com/UBC-MDS-2026-27/DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata.git
-
 cd DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata
 ```
 
-3.  Set Up the Environment
+#### 3: Generate an SSH Key
 
-Install the required Python packages using:
-
-``` bash
-uv sync
-```
-
-4.  Download the Dataset
-
-The analysis uses kagglehub to download the dataset directly from Kaggle.
-
-The dataset is identified by:
+If you do not already have an SSH key named `id_ed25519`, generate one using the following command:
 
 ``` bash
-dataset = "thedevastator/billboard-hot-100-audio-features"
+ssh-keygen -t ed25519
 ```
 
-The following files are downloaded:
+Press Enter at each prompt to accept the default settings. Ensure that the public key exists at `~/.ssh/id_ed25519.pub` before proceeding.
 
-- Hot Stuff.csv
+#### 4: Download the Docker Image
 
-- Hot 100 Audio Features.csv
+From the root directory of the repository, download the pre-built Docker image using the following command:
 
-The download process is included in the analysis code, so the data does not need to be downloaded manually. But before running the report, create the data folders if they do not already exist by running:
+``` bash
+docker compose pull
+```
+
+This command downloads the version of the Docker image specified in `docker-compose.yml`, ensuring that users run the analysis in the same computational environment.
+
+#### 5: Prepare the Data Directories
+
+The analysis uses the Python `kagglehub` package to download the dataset directly from Kaggle. The download process is included in the analysis code, so users do not need to download the dataset manually.
+
+Before rendering the report, create the required data directories if they do not already exist:
 
 ``` bash
 mkdir -p data/raw data/processed
 ```
 
-5.  Run the Analysis
+#### 6: Run the Analysis
 
-From the root directory of the repository, run:
+From the root directory of the repository, run the following command:
 
 ``` bash
-uv run quarto render analysis/billboard-top-10-prediction.qmd or uv run quarto preview analysis/billboard-top-10-prediction.qmd 
+docker compose run --rm analysis-env uv run quarto render analysis/billboard-top-10-prediction.qmd
 ```
 
-This renders `analysis/billboard-top-10-prediction.html`. Quarto runs the code from the`analysis/`folder, so the relative paths to`data/` in the report resolve correctly.
+This command runs the analysis inside a temporary Docker container. The analysis performs data loading, cleaning, exploratory data analysis, model training, and evaluation.
 
-The analysis performs data loading, cleaning, exploratory data analysis, model training, and evaluation. The results are presented in a rendered HTML report.
+The `--rm` flag automatically removes the temporary container once the rendering process finishes. No additional commands are required to stop or remove the container.
 
-6.  View the Report
+#### 7: View the Report
 
-After rendering, open the generated HTML file in the analysis/ directory.
+After rendering is complete, open the generated HTML report located at `analysis/billboard-top-10-prediction.html` in a web browser.
 
-### Dependencies
+## Dependencies
 
-This project uses Python(3.14 or later) for data processing, visualization, and machine learning. The main libraries include:
+Git and Docker Desktop are required to reproduce this analysis.
 
-- pandas and numpy for data manipulation and numerical operations.
+All other computational dependencies, including Python, uv, Quarto, and the required Python packages, are provided within the Docker environment.
 
-- kagglehub for downloading the dataset.
+The main Python libraries used in this project include pandas and numpy for data manipulation and numerical operations, kagglehub for downloading the dataset, and scikit-learn for preprocessing, classification, and model evaluation.
 
-- scikit-learn for preprocessing, classification, and model evaluation.
+The complete list of Python package dependencies and their versions can be found in [pyproject.toml](pyproject.toml) and [uv.lock](uv.lock). The computational environment is defined in the [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml).
 
-- Quarto is used to generate the final analysis report.
+## Contributing
 
-- Python package dependencies and their versions are managed using uv. For the complete list of dependencies, refer to pyproject.toml and uv.lock.
+If you would like to contribute to this project or make changes to the analysis, please refer to our [Contributing Guidelines](CONTRIBUTING.md) for instructions on setting up and working within the development environment.
 
-### License
+## License
 
 The following licenses are proposed for this project:
 
@@ -137,7 +130,7 @@ The original Kaggle dataset: Dataset copyright by authors (see Dataset license a
 
 For the complete license terms, see LICENSE.md.
 
-### Generative AI Usage
+## Generative AI Usage
 
 Generative AI tools were used to assist with various aspects of the project's documentation and code development.
 
