@@ -4,7 +4,15 @@ Thank you for your interest in contributing to Group 25's DSCI 522 project, Pred
 
 We welcome suggestions, bug reports, and contributions that improve the project's code, analysis, documentation, and reproducibility.
 
-Before contributing, please review our Code of Conduct.
+Before contributing, please review our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Getting Started
+
+Before contributing to this project, follow the setup instructions in the Usage section of our [README](README.md) to install Docker, clone the repository, generate an SSH key if needed, and download the Docker image.
+
+All computational work should be performed within the Docker environment to ensure consistency and reproducibility across contributors.
+
+Unless otherwise specified, run all commands from the root of this repository.
 
 ## Reporting Bugs
 
@@ -50,7 +58,7 @@ All pull requests must be reviewed by a Group 25 member before merging. Contribu
 
 ## Adding a Package and Updating the Docker Image
 
-The Docker image is built from `Dockerfile`, `pyproject.toml`, and `uv.lock`, and is published automatically to [Docker Hub](https://hub.docker.com/r/<your-dockerhub-username>/dsci-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata) by GitHub Actions. You never need to build or push it yourself.
+The Docker image is built from `Dockerfile`, `pyproject.toml`, and `uv.lock`, and is published automatically to [Docker Hub](https://hub.docker.com/r/%3Cyour-dockerhub-username%3E/dsci-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata) by GitHub Actions. You never need to build or push it yourself.
 
 To add or update a package:
 
@@ -95,25 +103,25 @@ The rendered report is published on GitHub Pages from `docs/index.html`. Wheneve
 
 First, make sure you are on your feature branch and have the latest Docker image:
 
-```bash
+``` bash
 docker compose pull
 ```
 
 Next, render the report inside the container. This ensures it is built with the same packages as everyone else's:
 
-```bash
+``` bash
 docker compose run --rm analysis-env uv run quarto render analysis/billboard-top-10-prediction.qmd
 ```
 
 Then copy the rendered report into the `docs/` folder, which is the folder GitHub Pages serves:
 
-```bash
+``` bash
 cp analysis/billboard-top-10-prediction.html docs/index.html
 ```
 
 Finally, commit both files, push your branch, and open a pull request as usual:
 
-```bash
+``` bash
 git add analysis/billboard-top-10-prediction.html docs/index.html
 git commit -m "Republish report"
 git push
