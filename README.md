@@ -41,7 +41,7 @@ The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-
 
 ## Usage
 
-The following instructions describe how to reproduce the analysis locally.
+We run the analysis in a Docker container, so everyone uses the same software and package versions. The image is published on Docker Hub at [nitpreetb/dsci-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata](https://hub.docker.com/r/nitpreetb/dsci-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata).
 
 #### 1: Prerequisites
 
