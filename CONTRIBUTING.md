@@ -97,6 +97,96 @@ To add or update a package:
 
 Do not edit the `image:` line in `docker-compose.yml` by hand. The workflow updates it.
 
+## Working in the container
+
+To run and edit the project, we work inside the Docker container, using Positron over ssh.
+
+**Before your first connection:**
+
+1.  Download [Positron](https://positron.posit.co/download.html), if you do not already have it.
+
+2.  Set up an ssh key, if you do not already have one. In a terminal on your computer, run the command below and press Enter at each question:
+
+    ``` bash
+    ssh-keygen -t ed25519
+    ```
+
+    Then check that `~/.ssh/id_ed25519.pub` exists.
+
+3.  Check that Git has your correct email on your computer:
+
+    ``` bash
+    git config --global user.email
+    ```
+
+    It should print the email of your GitHub account. If it prints nothing, set your name and email. `docker-compose.yml` shares these with the container, so your commits there count as yours:
+
+    ``` bash
+    git config --global user.name "Your Name"
+    git config --global user.email "you@example.com"
+    ```
+4. Open Docker Desktop on your computer and ensure it is running. 
+
+5. Download the image, from the root of the repository:
+
+    ``` bash
+    docker compose pull
+    ```
+
+**Connecting with Positron:**
+
+1.  Start the container from the root of the repository:
+
+    ``` bash
+    docker compose up -d
+    ```
+
+2.  In Positron, open the Command Palette (Cmd+Shift+P on Mac, Ctrl+Shift+P on windows).
+
+3. Type and run **Remote SSH: Show Remote Menu** → select **Connect to Host** and  type `root@localhost:2222`. 
+    
+    **If the connection fails** (e.g. `Could not establish connection to "localhost"` or `ECONNREFUSED`), click **Close Remote**, then try again using the IP address instead of `localhost`: and type `root@127.0.0.1:2222`. 
+
+4.  Open Folder in the Explorer. Type in `/workspace` at the path box that appears.
+
+5.  If Positron shows **Restricted Mode**, click **Trust this folder**.
+
+6.  In the Command Palette pick the console with the interpreter at `/opt/venv/bin/python`. If it isn't listed, run **Python: Select Interpreter** → **Enter interpreter path...** and type it in. Check it with:
+
+    ``` python
+    import sys; print(sys.executable)
+    ```
+
+7.  You should now be abe to use the terminal, console and render in positron.
+    To confirm, in the terminal run:
+
+    ````python
+    uv run quarto preview analysis/billboard-top-10-prediction.qmd
+    ````
+    
+ **If you are having issues**, check the section **Troubleshooting Help** found below. 
+
+8.  When you're finished, close the Positron window and run:
+
+    ``` bash
+    docker compose down
+    ```
+
+**Troubleshooting Help**
+
+-   **Restricted Mode / Python unavailable:** click **Trust this folder**.
+-   **`/opt/venv/bin/python` not in the list:** enter the path by hand (Connecting with Positron: step 6).
+-   **"Remote host identification has changed":** run `ssh-keygen -R "[localhost]:2222"` and connect again **or**
+     `ssh-keygen -R "[127.0.0.1]:2222` if you used the IP address.
+-   **GitHub asks you to sign in when you push:** sign in once in the browser window that opens. Positron will remember it.
+-   **Docker is open**: Ensure you are signed in and Docker is already turned on.
+-   **If the connection fails (for Windows)** instead of `localhost`: and type `root@127.0.0.1:2222` (Connecting with Positron: Step 3). 
+-   **The ssh key shows up as a folder instead of a file:** this means Docker started before your key existed. 
+    Stop the container with `docker compose down`, delete the `id_ed25519.pub` folder inside `~/.ssh`, 
+    create your key again (Before your first connection: Step 2) and reconnect.
+-   **Error saying port 2222 is taken:** another program on your computer is already using it.
+     Open `docker-compose.yml`, change the number on the left of `"2222:22"` (for example to `"2223:22"`) and use that new number when you connect (e.g. `root@localhost:2223`).
+
 ## Republishing the Report
 
 The rendered report is published on GitHub Pages from `docs/index.html`. Whenever you change the analysis or the report, you also need to republish it so the website matches the code in the repository.
@@ -129,6 +219,7 @@ git push
 
 Once the pull request is merged into `main`, GitHub Pages updates the website automatically within a few minutes. Please do not edit `docs/index.html` by hand, and keep `embed-resources: true` in the report's YAML header so that all figures are included in the single HTML file.
 
+
 ## Generative AI Policy
 
 Contributors may use generative AI tools, such as ChatGPT, GitHub Copilot, or Claude, to assist with coding, debugging, documentation, and brainstorming.
@@ -150,3 +241,4 @@ Contributions that do not follow these guidelines may be requested for revision 
 ## Questions
 
 For questions about contributing, please open an issue in the project repository.
+
