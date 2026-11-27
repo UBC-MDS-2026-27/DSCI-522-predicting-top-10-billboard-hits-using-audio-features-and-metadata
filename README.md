@@ -51,7 +51,7 @@ Open Docker Desktop and ensure that it is running before proceeding with the fol
 
 #### 2: Clone the Repository
 
-Open a Git Bash terminal and run the following commands to clone the repository and navigate to the project directory:
+Open a terminal (Git Bash on Windows) and run the following commands to clone the repository and navigate to the project directory:
 
 ``` bash
 git clone https://github.com/UBC-MDS-2026-27/DSCI-522-predicting-top-10-billboard-hits-using-audio-features-and-metadata.git
